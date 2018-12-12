@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App components snapshots test 1`] = `
+<div>
+  <div
+    className="navbar-fixed"
+  >
+    <nav
+      className="blue-grey darken-4"
+    >
+      <div
+        className="nav-wrapper container"
+      >
+        <a
+          className="brand-logo"
+          href="/"
+        >
+          <img
+            alt="Donut"
+            src="logo.svg"
+            width={55}
+          />
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div
+    className="container"
+  >
+    <div
+      className="layout-content"
+    >
+      <div
+        className="row"
+      >
+        <table
+          className="responsive-table striped highlight"
+          style={
+            Object {
+              "background": "#fff",
+            }
+          }
+        >
+          <thead>
+            <tr>
+              <th>
+                Display Name
+              </th>
+              <th>
+                Base Currency
+              </th>
+              <th>
+                Quote Currency
+              </th>
+              <th>
+                Minimum Size
+              </th>
+              <th>
+                Maximum Size
+              </th>
+              <th>
+                Quote
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody />
+        </table>
+      </div>
+    </div>
+    <div
+      className="modal "
+    />
+  </div>
+</div>
+`;

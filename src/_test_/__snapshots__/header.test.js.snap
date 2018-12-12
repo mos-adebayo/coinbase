@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header components snapshots test 1`] = `
+<div
+  className="navbar-fixed"
+>
+  <nav
+    className="blue-grey darken-4"
+  >
+    <div
+      className="nav-wrapper container"
+    >
+      <a
+        className="brand-logo"
+        href="/"
+      >
+        <img
+          alt="Donut"
+          src="logo.svg"
+          width={55}
+        />
+      </a>
+    </div>
+  </nav>
+</div>
+`;
