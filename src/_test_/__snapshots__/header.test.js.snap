@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header components snapshots test 1`] = `
+exports[`Header components snapshot 1`] = `
 <div
   className="navbar-fixed"
 >

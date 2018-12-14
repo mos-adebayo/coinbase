@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import renderer from 'react-test-renderer';
 import { configure, shallow } from "enzyme";
-
 import App from "../component/App";
 
 //Enzyme Configurations
@@ -23,17 +22,16 @@ test('App renders without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
-test('Load coin item modal opens', () => {
+test('Coin item modal opens', () => {
     const AppRender = shallow(<App/>);
     const AppRenderInstance = AppRender.instance();
     expect(AppRender.state('modalIsOpen')).toBeFalsy(); //default state of modal
-    const coinItem = {};
-    AppRenderInstance.fetchCoinItem(coinItem); //trigger function to show modal
+    AppRenderInstance.fetchCoinItem({}); //trigger function to show modal
     expect(AppRender.state('modalIsOpen')).toBeTruthy(); //resultant state of modal
 
 });
 
-test('Load coin item modal dismiss successfully', () => {
+test('Coin item modal dismiss successfully', () => {
     const AppRender = shallow(<App/>);
     const AppRenderInstance = AppRender.instance();
     expect(AppRender.state('modalIsOpen')).toBeFalsy(); //default state of modal
@@ -44,7 +42,7 @@ test('Load coin item modal dismiss successfully', () => {
 
 });
 
-test('Load coin item modal displays & dismiss successfully', () => {
+test('Coin item modal displays & dismiss successfully', () => {
     const AppRender = shallow(<App/>);
     const AppRenderInstance = AppRender.instance();
     expect(AppRender.state('modalIsOpen')).toBeFalsy(); //default state of modal
