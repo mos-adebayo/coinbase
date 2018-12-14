@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import Header from './Header';
+import DataTable from './DataTable';
 
 class HomepageComponent extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class HomepageComponent extends Component {
     }
 
     fetchCoinItems = () => {
+        this.setState({requesting: true}); //Set loader to true
         const requesting = false;
         axios.get(`https://api.pro.coinbase.com/products`, {
             headers: { "Content-Type": "application/json" }
@@ -38,24 +40,18 @@ class HomepageComponent extends Component {
                     errorMessage = error.message;
                 }
                 window.alert(errorMessage);
-                this.setState({requesting})
+                this.setState({requesting})  //Hide loader
             });
     };
 
-    fetchCoinItem = (event, activeCoinItem) =>{
-        event.preventDefault();
+    fetchCoinItem = (activeCoinItem) =>{
         this.setState({ modalIsOpen: true, activeCoinItem})
     };
-    showModal = (event) =>{
-        event.preventDefault();
+    dismissModal = () =>{
         this.setState({modalIsOpen: false});
     };
     render() {
         const { coinItems, modalIsOpen, activeCoinItem, requesting } = this.state;
-
-        //Show loader on API Request
-        if(requesting)
-            return <p>Loading</p>;
 
         return (
             <div>
@@ -63,40 +59,15 @@ class HomepageComponent extends Component {
                 <div className="container">
                     <div className={`layout-content`}>
                         <div className="row">
-                            <table className={'responsive-table striped highlight'} style={{background: '#fff'}}>
-                                <thead>
-                                <tr>
-                                    <th>Display Name</th>
-                                    <th>Base Currency</th>
-                                    <th>Quote Currency</th>
-                                    <th>Minimum Size</th>
-                                    <th>Maximum Size</th>
-                                    <th>Quote</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    coinItems.map((item, key)=>{
-                                        return (
-                                            <tr key={key}>
-                                                <td>{item.display_name}</td>
-                                                <td>{item.base_currency}</td>
-                                                <td>{item.quote_currency}</td>
-                                                <td>{item.base_min_size}</td>
-                                                <td>{item.base_max_size}</td>
-                                                <td>{item.quote_increment}</td>
-                                                <td>
-                                                    <a href="/" onClick={(e) =>this.fetchCoinItem(e, item)}>View</a>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                                </tbody>
-                            </table>
+                            {/*Show loader when page is requesting data from API */}
+                            {
+                                requesting ?
+                                    <div className="progress">
+                                        <div className="indeterminate"> </div>
+                                    </div> :
+                                    <DataTable coinItems={coinItems} handleFetchCoinItem={this.fetchCoinItem}/>
+                            }
                         </div>
-
                     </div>
 
                     {/*Modal view for coin item */}
@@ -105,7 +76,7 @@ class HomepageComponent extends Component {
                             activeCoinItem &&
                             <div>
                                 <div className="modal-content">
-                                    <h6 className={'truncate'}>{activeCoinItem.display_name}</h6>
+                                    <h6 className={'truncate blue-text'}>{activeCoinItem.display_name}</h6>
                                     <table className={'striped centered'}>
                                         <thead>
                                             <tr>
@@ -150,7 +121,7 @@ class HomepageComponent extends Component {
                                     </table>
                                 </div>
                                 <div className="modal-footer">
-                                    <span className="waves-effect waves-light btn" onClick={this.showModal}>Dismiss</span>
+                                    <span className="waves-effect waves-light btn" onClick={this.dismissModal}>Dismiss</span>
                                 </div>
                             </div>
                         }

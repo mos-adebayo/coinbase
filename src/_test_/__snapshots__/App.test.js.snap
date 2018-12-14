@@ -33,41 +33,15 @@ exports[`App components snapshots test 1`] = `
       <div
         className="row"
       >
-        <table
-          className="responsive-table striped highlight"
-          style={
-            Object {
-              "background": "#fff",
-            }
-          }
+        <div
+          className="progress"
         >
-          <thead>
-            <tr>
-              <th>
-                Display Name
-              </th>
-              <th>
-                Base Currency
-              </th>
-              <th>
-                Quote Currency
-              </th>
-              <th>
-                Minimum Size
-              </th>
-              <th>
-                Maximum Size
-              </th>
-              <th>
-                Quote
-              </th>
-              <th>
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody />
-        </table>
+          <div
+            className="indeterminate"
+          >
+             
+          </div>
+        </div>
       </div>
     </div>
     <div
