@@ -35,8 +35,7 @@ test('Coin item modal dismiss successfully', () => {
     const AppRender = shallow(<App/>);
     const AppRenderInstance = AppRender.instance();
     expect(AppRender.state('modalIsOpen')).toBeFalsy(); //default state of modal
-    const coinItem = {};
-    AppRenderInstance.fetchCoinItem(coinItem);
+    AppRenderInstance.fetchCoinItem({});
     AppRenderInstance.dismissModal(); //trigger dismiss modal function
     expect(AppRender.state('modalIsOpen')).toBeFalsy(); //resultant state of modal
 
@@ -46,8 +45,7 @@ test('Coin item modal displays & dismiss successfully', () => {
     const AppRender = shallow(<App/>);
     const AppRenderInstance = AppRender.instance();
     expect(AppRender.state('modalIsOpen')).toBeFalsy(); //default state of modal
-    const coinItem = {};
-    AppRenderInstance.fetchCoinItem(coinItem);
+    AppRenderInstance.fetchCoinItem({});
     expect(AppRender.find('.modal').hasClass('open')).toBeTruthy(); //modal should have `open`  as part of the class name
     AppRenderInstance.dismissModal();
     expect(AppRender.find('.modal').hasClass('open')).toBeFalsy();//modal should not have `open`  as part of the class name
