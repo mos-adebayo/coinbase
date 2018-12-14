@@ -23,7 +23,7 @@ class HomepageComponent extends Component {
     fetchCoinItems = () => {
         this.setState({error: false, requesting: true}); //Set loader to true
         const requesting = false;
-        axios.get(`https://api.pro.coinbase.com/products2`, {
+        axios.get(`https://api.pro.coinbase.com/products`, {
             headers: { "Content-Type": "application/json" }
         }).then(res => {
                 this.setState({coinItems: res.data, requesting});
@@ -81,7 +81,7 @@ class HomepageComponent extends Component {
                             activeCoinItem &&
                             <div>
                                 <div className="modal-content">
-                                    <h6 className={'truncate blue-text'}>{activeCoinItem.display_name}</h6>
+                                    <h6 className={'truncate teal-text'}>{activeCoinItem.display_name}</h6>
                                     <table className={'striped centered'}>
                                         <thead>
                                             <tr>
