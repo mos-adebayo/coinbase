@@ -10,7 +10,8 @@ class HomepageComponent extends Component {
             modalIsOpen: false,
             activeCoinItem: null,
             coinItems: [],
-            requesting: false
+            requesting: false,
+            error: false
         }
 
     }
@@ -20,13 +21,13 @@ class HomepageComponent extends Component {
     }
 
     fetchCoinItems = () => {
-        this.setState({requesting: true}); //Set loader to true
+        this.setState({error: false, requesting: true}); //Set loader to true
         const requesting = false;
-        axios.get(`https://api.pro.coinbase.com/products`, {
+        axios.get(`https://api.pro.coinbase.com/products2`, {
             headers: { "Content-Type": "application/json" }
         }).then(res => {
                 this.setState({coinItems: res.data, requesting});
-            }).catch(function (error) {
+            }).catch( (error)  => {
                 let errorMessage;
                 if (error.response) {
                     // The request was made and the server responded with a status code
@@ -39,8 +40,7 @@ class HomepageComponent extends Component {
                     // Something happened in setting up the request that triggered an Error
                     errorMessage = error.message;
                 }
-                window.alert(errorMessage);
-                this.setState({requesting})  //Hide loader
+                this.setState({requesting, error: errorMessage})  //Hide loader
             });
     };
 
@@ -51,7 +51,7 @@ class HomepageComponent extends Component {
         this.setState({modalIsOpen: false});
     };
     render() {
-        const { coinItems, modalIsOpen, activeCoinItem, requesting } = this.state;
+        const { coinItems, modalIsOpen, activeCoinItem, requesting, error } = this.state;
 
         return (
             <div>
@@ -61,11 +61,16 @@ class HomepageComponent extends Component {
                         <div className="row">
                             {/*Show loader when page is requesting data from API */}
                             {
-                                requesting ?
+                                (requesting) ?
                                     <div className="progress">
                                         <div className="indeterminate"> </div>
                                     </div> :
-                                    <DataTable coinItems={coinItems} handleFetchCoinItem={this.fetchCoinItem}/>
+                                    (!error) ?
+                                        <DataTable coinItems={coinItems} handleFetchCoinItem={this.fetchCoinItem}/> //Show records when there is no error
+                                        : <div className={'center-align'}>
+                                            <h5 className={'center-align'}>{error}</h5>
+                                            <a href={'/'}>Refresh</a>
+                                          </div>
                             }
                         </div>
                     </div>
